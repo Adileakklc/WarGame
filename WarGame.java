@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
-// Knight sýnýfý
+// Knight sinifi
 class Knight implements Comparable<Knight> {
     private String rank;
     private int value;
@@ -26,7 +26,7 @@ class Knight implements Comparable<Knight> {
     }
 }
 
-// Player sýnýfý
+// Player sinifi
 class Player {
     private ArrayList<Knight> hand = new ArrayList<>();
 
@@ -53,7 +53,7 @@ class Player {
     }
 }
 
-// Deck sýnýfý
+// Deck sinifi
 class Deck {
     private ArrayList<Knight> deck = new ArrayList<>();
 
@@ -75,14 +75,14 @@ class Deck {
     }
 }
 
-// WarGame sýnýfý
+// WarGame sinifi
 public class WarGame {
 
     Player p1, p2;
     Knight p1Knight, p2Knight;
     Deck theDeck;
-    ArrayList<Knight> p1Pile, p2Pile; // Savaþ olduðunda þövalyeleri tutmak için liste
-    Boolean justWarred; // Oyunda bir savaþ olup olmadýðýný bilmek için boolean kullanýyorum
+    ArrayList<Knight> p1Pile, p2Pile; // Savas oldugunda sÃ¶valyeleri tutmak iÃ§in liste
+    Boolean justWarred; // Oyunda bir savas olup olmadigini bilmek iÃ§in boolean kullaniyorum
 
     public WarGame() {
         justWarred = false;
@@ -94,7 +94,7 @@ public class WarGame {
         int[] values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         theDeck = new Deck(ranks, values);
         theDeck.shuffle();
-        for (int i = 0; i < 10; i++) { // Þövalyeler oyuncularýn eline daðýtýr
+        for (int i = 0; i < 10; i++) { // SÃ¶valyeler oyuncularin eline dagitir
             p1.getKnight(theDeck.deal());
             p2.getKnight(theDeck.deal());
         }
@@ -106,20 +106,20 @@ public class WarGame {
         while (true) {
             pause(1000);
             showKnights();
-            if (!justWarred) { // Masada þövalye yok, bu yüzden her oyun bir þövalye koyar
+            if (!justWarred) { // Masada sÃ¶valye yok, bu yÃ¼zden her oyun bir sÃ¶valye koyar
                 if (p1.knightCount() > 0) p1Pile.add(p1.playKnight());
                 else {
-                    winner = "p2"; // 1. oyuncunun baþka þövalyesi yok
+                    winner = "p2"; // 1. oyuncunun baska sÃ¶valyesi yok
                     break;
                 }
 
                 if (p2.knightCount() > 0) p2Pile.add(p2.playKnight());
                 else {
-                    winner = "p1"; // 2. oyuncunun baþka þövalyesi yok
+                    winner = "p1"; // 2. oyuncunun baska sÃ¶valyesi yok
                     break;
                 }
             }
-            justWarred = false; // Oyuncularýn bir sonraki turda þövalyelerini býrakmak için
+            justWarred = false; // Oyuncularin bir sonraki turda sÃ¶valyelerini birakmak iÃ§in
             p1Knight = p1Pile.get(p1Pile.size() - 1);
             p2Knight = p2Pile.get(p2Pile.size() - 1);
 
@@ -129,12 +129,12 @@ public class WarGame {
                 else winner = "none";
             }
 
-            if (winner.equals("p1")) { // Masadaki tüm þövalyeleri P1'e taþý
+            if (winner.equals("p1")) { // Masadaki tÃ¼m sÃ¶valyeleri P1'e tasi
                 while (p1Pile.size() > 0) p1.getKnight(p1Pile.remove(0));
                 while (p2Pile.size() > 0) p1.getKnight(p2Pile.remove(0));
             }
 
-            if (winner.equals("p2")) { // Masadaki tüm þövalyeleri P2'ye taþý
+            if (winner.equals("p2")) { // Masadaki tÃ¼m Ã¾Ã¶valyeleri P2'ye tasi
                 while (p1Pile.size() > 0) p2.getKnight(p1Pile.remove(0));
                 while (p2Pile.size() > 0) p2.getKnight(p2Pile.remove(0));
             }
@@ -142,7 +142,7 @@ public class WarGame {
             if (winner.equals("none")) {
                 justWarred = true;
                 int count = 0;
-                // Her oyuncudan en fazla 4 þövalye ekraný yazdýralým
+                // Her oyuncudan en fazla 4 sÃ¶valye ekrani yazdiralim
                 while (p1.knightCount() > 0 && count < 4) {
                     p1Pile.add(p1.playKnight());
                     count++;
@@ -168,11 +168,11 @@ public class WarGame {
     }
 
     public void showKnights() {
-    	//oyuncularýn sahip olduðu þövalye sayýsýný yazdýrýr
+    	//oyuncularin sahip oldugu sÃ¶valye sayisini yazdirir
         System.out.println("P1 has " + p1.knightCount() + " knights. P2 has " + p2.knightCount() + " knights.");
         if (p1Knight != null) System.out.println("Player 1 knight = " + p1Knight.toString());
         if (p2Knight != null) System.out.println("Player 2 knight = " + p2Knight.toString());
-        //oyuncu 1'in elindeki þövalyeleri yazdýrýr
+        //oyuncu 1'in elindeki sÃ¶valyeleri yazdirir
         System.out.print("P1's hand: ");
         for (int i = 0; i < p1.knightCount(); i++) {
             Knight knight = p1.seeKnight(i);
@@ -181,7 +181,7 @@ public class WarGame {
             }
         }
         System.out.println();
-      //oyuncu 2'nin elindeki þövalyeleri yazdýrýr
+      //oyuncu 2'nin elindeki sÃ¶valyeleri yazdirir
         System.out.print("P2's hand: ");
         for (int i = 0; i < p2.knightCount(); i++) {
             Knight knight = p2.seeKnight(i);
